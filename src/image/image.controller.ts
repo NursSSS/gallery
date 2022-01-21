@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { ImageService } from './image.service';
 import { IImage } from './Interface/image.interface'
 
@@ -12,7 +12,7 @@ export class ImageController {
     }
 
     @Get(':id')
-    findImageByID(id: number){
+    findImageByID(@Param('id') id: number){
         return this.service.findImageByID(id)
     }
 

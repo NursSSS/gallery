@@ -16,10 +16,10 @@ export class ImageService {
     }
 
     findImageByID(id: number){
-        return this.DB.find(i => i.id === id)
+        return this.DB.find(item => item.id === +id)
     }
 
     pushToDB(item: IImage){
-        return this.DB.push(item) //return, чтобы видеть, что я добавляю :) 
+        this.DB.push(item)
     }
 }
