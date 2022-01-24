@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { ImageService } from './image.service';
-import { IImage } from './Interface/image.interface'
+import { PushImageDto } from './dto/push-image.dto'
 
 @Controller('image')
 export class ImageController {
@@ -12,12 +12,22 @@ export class ImageController {
     }
 
     @Get(':id')
-    findImageByID(@Param('id') id: number){
-        return this.service.findImageByID(id)
+    async findImageByID(@Param('id') id: number){
+        return await this.service.findImageByID(id)
     }
 
     @Post()
-    pushToDB(@Body() item:IImage){
-        return this.service.pushToDB(item)
+    async pushToDB(@Body() item: PushImageDto){
+        return await this.service.pushToDB(item)
+    }
+
+    @Put(':id')
+    async updateImage(@Param('id') id: number, @Body() dto: PushImageDto){
+        return await this.service.updateImage(id, dto)
+    }
+
+    @Delete(':id')
+    async deleteImage(@Param('id') id: number){
+        return await this.service.deleteImage(id)
     }
 }
