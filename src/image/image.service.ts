@@ -57,7 +57,6 @@ export class ImageService {
         }
         const indexOfImage = this.DB.findIndex(item => item === image)
         const deleted = this.DB.splice(indexOfImage, 1)
-        console.log(deleted)
         if(!deleted.length){
             throw new HttpException('Image is not deleted', HttpStatus.INTERNAL_SERVER_ERROR)
         }
