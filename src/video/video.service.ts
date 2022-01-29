@@ -1,4 +1,5 @@
 import { HttpCode, HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { CreateVideoDto } from './dto/create-video.dto';
 import { IVideo } from './interface/interface.interface';
 
 @Injectable()
@@ -17,6 +18,16 @@ export class VideoService {
         if(!video){
             throw new HttpException(`По запросу ${word} ничего не найдено`, HttpStatus.NOT_FOUND)
         }
+        return video
+    }
+
+    async PushVideo(dto: CreateVideoDto){
+        const video = this.videoDB.find((i: IVideo) => i.url == dto.url)
+        if(video){
+            throw new HttpException('This video already exist in gallery', HttpStatus.CONFLICT)
+        }
+        dto.id = this.videoDB.length +1
+        this.videoDB.push(dto)
         return video
     }
 }

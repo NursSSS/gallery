@@ -1,6 +1,6 @@
 import { Contains, IsOptional, Length } from 'class-validator'
 
-export interface IVideo {
+export class CreateVideoDto{
     id?: number
 
     @Length(2, 10)
