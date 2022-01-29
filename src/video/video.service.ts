@@ -19,7 +19,7 @@ export class VideoService {
 
     async findByWord(word: string){
         const video = this.videoDB.filter((i: IVideo) => i.name.toLowerCase().includes(word))
-        if(!video){
+        if(!video.length){
             throw new HttpException(`По запросу ${word} ничего не найдено`, HttpStatus.NOT_FOUND)
         }
         return video
